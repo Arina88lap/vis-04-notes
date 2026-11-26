@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Журнал заметок</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f4f6f5;color:#1b2821;font:16px/1.5 system-ui,sans-serif} main{max-width:700px;margin:72px auto;padding:0 22px} h1{font-size:36px;line-height:1.1;margin:0 0 28px} form.add,li{display:flex;gap:10px} input,button{font:inherit;border:1px solid #b7c5bd;border-radius:8px;padding:10px 13px} input{flex:1;min-width:0} button{background:#205d40;color:#fff;border-color:#205d40;cursor:pointer} ul{padding:0;display:grid;gap:9px;margin:24px 0} li{background:white;border:1px solid #d9e0db;border-radius:8px;padding:10px 12px;align-items:center;justify-content:space-between} li span{overflow-wrap:anywhere;white-space:pre-wrap} li button{background:white;color:#365143;border-color:#ccd6d0;font-size:14px;padding:6px 9px} p{color:#53675c}
+</style>
+</head>
+<body><main>
+<h1>Журнал заметок</h1>
+<form class="add" method="post" action="{{ url_for('add_note') }}">
+<input name="body" type="text" required maxlength="240" aria-label="Текст заметки" placeholder="Новая заметка">
+<button type="submit">Добавить</button>
+</form>
+{% if notes %}
+<ul aria-label="Список заметок">
+{% for note in notes %}
+<li><span>{{ note.body }}</span><form method="post" action="{{ url_for('delete_note', note_id=note.id) }}"><button type="submit">Удалить</button></form></li>
+{% endfor %}
+</ul>
+{% else %}<p>Заметок пока нет.</p>{% endif %}
+</main></body>
+</html>

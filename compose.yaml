@@ -1,0 +1,11 @@
+name: arina-vis-04
+services:
+  notes:
+    image: arina-vis-notes:lab4
+    build: .
+    ports:
+      - '127.0.0.1:8404:8000'
+    volumes:
+      - notes_data:/data
+volumes:
+  notes_data:
